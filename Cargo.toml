@@ -6,9 +6,8 @@ authors = ["Brent Pedersen <bpederse@gmail.com>"]
 description = "A tool for filtering VCF files using Lua expressions"
 readme = "README.md"
 homepage = "https://github.com/brentp/vcfexpress"
+license = "MIT"
 
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 mlua = { version = "0.9.9", features = [
