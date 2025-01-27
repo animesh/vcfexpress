@@ -16,8 +16,12 @@ that have this built in.
 For the optional output template, it uses [luau string templates](https://luau-lang.org/syntax#string-interpolation)
 where luau is lua with some extensions and very good speed.
 
-# Examples
+# Installation
 
++ For rust users: `cargo install vcfexpress`
++ Otherwise see [Releases](https://github.com/brentp/vcfexpress/releases) for a static linux binary
+
+# Examples
 
 extract a single variant and output a bed of the variant:
 ```
