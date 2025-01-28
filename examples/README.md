@@ -2,6 +2,8 @@
 
 This contains a set of examples of how to use vcfexpress.
 
+We welcome additional contributions!
+
 <details>
 <summary>Set the ID field of a variant</summary>
 
@@ -86,4 +88,8 @@ vcfexpress filter -p examples/add_filter_to_header.lua -e "if variant.qual < 100
 1       909238  .       G       C       6998.41 .
 ```
 
+The output header also contains:
+```
+##FILTER=<ID=LowQual,Description="Qual less than 1000">
+```
 </details>

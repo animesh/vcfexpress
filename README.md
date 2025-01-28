@@ -23,7 +23,8 @@ where luau is lua with some extensions and very good speed.
 
 # Examples
 
-Further examples are collected [here](examples/README.md)
+Further examples are collected [here](examples/README.md) and we encourage users to suggest 
+helpful examples or snippets.
 
 <details>
 <summary>Short functionality examples</summary>
