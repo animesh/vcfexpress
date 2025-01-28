@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: If you use this software, please cite it using these metadata.
+title: "Vcfexpress: flexible, rapid user-expressions to filter and format VCFs"
+abstract: "Motivation Variant Call Format (VCF) files are the standard output format for various software tools that identify genetic variation from DNA sequencing experiments. Downstream analyses require the ability to query, filter, and modify them simply and efficiently. Several tools are available to perform these operations from the command line, including BCFTools, vembrane, slivar, and others. Results Here, we introduce vcfexpress, a new, high-performance toolset for the analysis of VCF files, written in the Rust programming language. It is nearly as fast as BCFTools, but adds functionality to execute user expressions in the lua programming language for precise filtering and reporting of variants from a VCF or BCF file. We demonstrate performance and flexibility by comparing vcfexpress to other tools using the vembrane benchmark."
+authors:
+  - family-names: Pedersen
+    given-names: Brent S.
+    email: bpederse@gmail.com
+  - family-names: Quinlan
+    given-names: Aaron R.
+    email: aquinlan@genetics.utah.edu
+type: software
+doi: 10.1101/2024.11.05.622129
+year: 2024
+journal: bioRxiv
+repository-code: https://github.com/brentp/vcfexpress
+license: MIT
+identifiers:
+  - type: doi
+    value: 10.1101/2024.11.05.622129
+    description: The bioRxiv preprint
+references:
+  - type: article
+    authors:
+      - family-names: Pedersen
+        given-names: Brent S.
+      - family-names: Quinlan
+        given-names: Aaron R.
+    title: "Vcfexpress: flexible, rapid user-expressions to filter and format VCFs"
+    year: 2024
+    journal: bioRxiv
+    doi: 10.1101/2024.11.05.622129 
