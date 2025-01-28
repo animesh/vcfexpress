@@ -88,7 +88,9 @@ vcfexpress filter -p pre.lua -e 'return variant:format("AD")[1][2] > 0' \
 see [speed](https://brentp.github.io/vcfexpress/speed.html)
 
 
-# Attributes / Functions
+# Lua API
+
+Full documentation of lua attributes and methods is [here](lua-api.md)
 
 ```lua
 variant.chrom -> string
