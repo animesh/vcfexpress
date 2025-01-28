@@ -1,0 +1,4 @@
+*.vcf.gz
+*.bcf
+*.vcf
+target/
