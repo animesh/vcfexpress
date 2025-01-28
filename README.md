@@ -25,6 +25,10 @@ where luau is lua with some extensions and very good speed.
 
 Further examples are collected [here](examples/README.md)
 
+<details>
+<summary>Short functionality examples</summary>
+
+
 ---
 extract a single variant and output a bed of the variant:
 ```
@@ -83,10 +87,11 @@ vcfexpress filter -p pre.lua -e 'return variant:format("AD")[1][2] > 0' \
    input.vcf > output.vcf
 ```
 
+</details>
+
 # speed
 
 see [speed](https://brentp.github.io/vcfexpress/speed.html)
-
 
 # Lua API
 
@@ -151,8 +156,6 @@ pprint(sample)
     [2] = true}}
 --]]
 ```
-
-
 
 
 # Usage
