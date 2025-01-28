@@ -1,6 +1,6 @@
 [package]
 name = "vcfexpress"
-version = "0.3.2"
+version = "0.3.3"
 edition = "2021"
 authors = ["Brent Pedersen <bpederse@gmail.com>"]
 description = "A tool for filtering VCF files using Lua expressions"
@@ -12,7 +12,7 @@ license = "MIT"
 [dependencies]
 mlua = { version = "0.9.9", features = [
     #"lua54",
-    "luau",
+    "luau", # required
     "send",
     "parking_lot",
     #"module",

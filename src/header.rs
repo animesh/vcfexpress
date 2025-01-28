@@ -175,6 +175,35 @@ pub(crate) fn register_header(lua: &Lua) -> mlua::Result<()> {
             },
         );
         reg.add_function_mut(
+            "add_filter",
+            |_lua, (ud, tbl): (AnyUserData, HashMap<String, String>)| {
+                let this = ud.borrow_mut::<HeaderView>()?;
+                let c_str = std::ffi::CString::new(format!(
+                    r#"##FILTER=<ID={},Description="{}">"#,
+                    handle_hash_get(&tbl, "ID", "filter")?,
+                    handle_hash_get(&tbl, "Description", "filter")?,
+                ))
+                .expect("CString::new failed");
+                let ret =
+                    unsafe { rust_htslib::htslib::bcf_hdr_append(this.inner, c_str.as_ptr()) };
+                if ret != 0 {
+                    log::error!("Error adding FILTER field for {:?}: {}", tbl, ret);
+                    return Err(mlua::Error::ExternalError(Arc::new(
+                        std::io::Error::last_os_error(),
+                    )));
+                }
+                let ret = unsafe { rust_htslib::htslib::bcf_hdr_sync(this.inner) };
+                if ret != 0 {
+                    log::warn!(
+                        "Error syncing header after adding FILTER field for {:?}: {}",
+                        tbl,
+                        ret
+                    );
+                }
+                Ok(())
+            },
+        );
+        reg.add_function_mut(
             "add_format",
             |_lua, (ud, tbl): (AnyUserData, HashMap<String, String>)| {
                 let this = ud.borrow_mut::<HeaderView>()?;
@@ -283,6 +312,35 @@ mod tests {
             Ok(())
         })
         .expect("error in test_add_info")
+    }
+
+    #[test]
+    fn test_add_filter() {
+        let (lua, _header, mut header_view) = setup();
+        let globals = lua.globals();
+
+        let exp = lua
+            .load(
+                r#"
+            header:add_filter({ID="LowQual", Description="Qual less than 50"});
+            return tostring(header)
+            "#,
+            )
+            .set_name("test_add_filter")
+            .into_function()
+            .expect("error in test_add_filter");
+
+        lua.scope(|scope| {
+            globals.set(
+                "header",
+                scope.create_any_userdata_ref_mut(&mut header_view)?,
+            )?;
+            let result: String = exp.call(())?;
+            assert!(result.contains("##FILTER=<ID=LowQual"));
+
+            Ok(())
+        })
+        .expect("error in test_add_filter")
     }
 
     #[test]

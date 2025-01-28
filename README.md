@@ -23,6 +23,9 @@ where luau is lua with some extensions and very good speed.
 
 # Examples
 
+Further examples are collected [here](examples/README.md)
+
+---
 extract a single variant and output a bed of the variant:
 ```
 vcfexpress filter -e "return variant.id == 'rs2124717267'" \
@@ -122,7 +125,7 @@ header:format_get("AD") -> table<string,string>
 -- these header:add_* are available only in the prelude. currently only Number=1 is supported.
 header:add_info({Type="Integer", Number=1, Description="asdf", ID="new field"})
 header:add_format({Type="Integer", Number=1, Description="xyz", ID="new format field"})
-
+header:add_filter({ID="LowQual", Description="Qual less than 50"})
 
 sample = variant:sample("NA12878")
 sample.DP -- any fields in the row are available. special case for GT. use pprint to see structure:
@@ -176,9 +179,3 @@ Options:
   -h, --help
           Print help
 ```
-
-
-# TODO
-
-+ Currently --set-expressions can only be used when output is VCF. Update to support template output as well. So we need the header to translate.
-+ support --set-expressions for FORMAT fields (the infrastructure for this is there, just have to expose it)
