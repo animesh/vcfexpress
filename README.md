@@ -3,7 +3,8 @@
 > [!CAUTION]
 > While the output of vcfexpress is tested and reliable, the error messages might be lacking. Please [report](https://github.com/brentp/vcfexpress/issues).
 
-[![Rust](https://github.com/brentp/vcfexpress/actions/workflows/rust.yml/badge.svg)](https://github.com/brentp/vcfexpress/actions/workflows/rust.yml)
+[![Rust](https://github.com/brentp/vcfexpress/actions/workflows/rust.yml/badge.svg)](https://github.com/brentp/vcfexpress/actions/workflows/rust.yml) [![DOI](https://zenodo.org/badge/786874644.svg)](https://doi.org/10.5281/zenodo.14756837)
+
 
 This is an experiment on how to implement user-expressions
 that can filter (and modify) a VCF and specify an output template.
