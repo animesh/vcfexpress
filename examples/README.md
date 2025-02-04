@@ -5,6 +5,17 @@ This contains a set of examples of how to use vcfexpress.
 We welcome additional contributions!
 
 <details>
+<summary>Test for Hardy-Weinberg Equilibrium</summary>
+
+Here we filter out variants that are out of HWE (have a low p-value)
+
+```
+vcfexpress filter -p examples/hwe.lua -e "hwe(variant) > 0.05" $vcf -o variants-in-hwe.bcf
+```
+
+</details>
+
+<details>
 <summary>Set the ID field of a variant</summary>
 
 we can set the ID field of the variant. here we use the following lua code in `examples/set-id-to-chrom-start-ref-alt.lua` to do so:
@@ -16,14 +27,18 @@ function set_id(variant)
     return true
 end
 ```
+
 Then we call as:
+
 ```
 vcfexpress filter \
     -p examples/set-id-to-chrom-start-ref-alt.lua \
     -e "return set_id(variant)" \
     examples/trio.vcf.gz -o set.vcf.gz
 ```
+
 and the output looks like:
+
 ```
 $ zcat set.vcf.gz | grep -v ^## | cut -f 1-5 | head
 #CHROM  POS     ID      REF     ALT
@@ -37,12 +52,14 @@ $ zcat set.vcf.gz | grep -v ^## | cut -f 1-5 | head
 1       908823  1-908822-G-A    G       A
 1       909238  1-909237-G-C    G       C
 ```
+
 </details>
 
 <details>
 <summary>Filter output based on trio genotypes</summary>
 
 Here, we extract sites where all samples are heterozygotes (with 1 alternate allele).
+
 ```
 vcfexpress filter \
     -e "local gts = variant.genotypes; return gts[1].alts == 1 and gts[2].alts == 1 and gts[3].alts == 1" \
@@ -68,6 +85,7 @@ GT:DP:RO:AO     0/1:54:25:29    0/1:64:29:35    0/1:39:19:19
 Here we update the FILTER field based on the variant QUAL field.
 
 First, we add the filter to the header using code run in the prelude:
+
 ```
 echo 'header:add_filter({ID="LowQual", Description="Qual less than 1000"})' > examples/add_filter_to_header.lua
 ```
@@ -89,7 +107,9 @@ vcfexpress filter -p examples/add_filter_to_header.lua -e "if variant.qual < 100
 ```
 
 The output header also contains:
+
 ```
 ##FILTER=<ID=LowQual,Description="Qual less than 1000">
 ```
+
 </details>
